@@ -13,29 +13,26 @@ export default class App extends Component {
   }
 
   componentDidMount() {
-    // |||||||||||||| fetch |||||||||||||||
-    // fetch("https://api.spoonacular.com/recipes/search?query=cheese&number=4&apiKey=27a02bbb5b48401f96bfda6a7d3e2545")
-    //   .then(response => response.json()) // first response => resolved
-    //   .then(
-    //     result => {
-    //       console.log(result.results)
+    
+    //Code below implemented by following the provided resource for multiple API calls 
+    //Citation: https://www.storyblok.com/tp/how-to-send-multiple-requests-using-axios
 
-    //       this.setState({
-    //         isLoaded: true,
-    //         items:result.results
-    //       })
 
-    //       console.log("state is updated",this.state.data)
-    //     }
-    //   ).catch(e => console.log("there's a error", e))
-    // |||||||||||||||||||||||||||||||||||||
     let one = "http://anapioficeandfire.com/api/characters/16"
     let two = "http://www.anapioficeandfire.com/api/houses/37"
     let three = "https://api.storyblok.com/v1/cdn/stories/vue?version=published&token=wANpEQEsMYGOwLxwXQ76Ggtt"
+    let four = "http://www.anapioficeandfire.com/api/houses/17"
+    let five = "http://www.anapioficeandfire.com/api/characters/901"
+    let six= "http://www.anapioficeandfire.com/api/houses/362"
+    let seven = "http://www.anapioficeandfire.com/api/characters/232"
     
     const requestOne = axios.get(one);
     const requestTwo = axios.get(two);
     const requestThree = axios.get(three);
+    const requestFour = axios.get(three);
+    const requestFive = axios.get(three);
+    const requestSix = axios.get(three);
+    const requestSeven = axios.get(three);
     
     axios.all([requestOne, requestTwo, requestThree]).then(axios.spread((...responses) => {
       const responseOne = responses[0]
@@ -43,8 +40,13 @@ export default class App extends Component {
       const responesThree = responses[2]
       // use/access the results 
 
-      let mary=responseOne.data.born
-      let bob=responseTwo.data.region
+      let a=responseOne.data.born
+      let b=responseTwo.data.region
+      let c=responseTwo.data.region
+      let d=responseTwo.data.region
+      let e=responseTwo.data.region
+      let f=responseTwo.data.region
+      let g=responseTwo.data.region
       
       this.setState({data: [mary,bob]})
       //this.setState({data: bob})
@@ -62,11 +64,17 @@ export default class App extends Component {
          <h1> Where was Margaery Tyrell born? </h1>
          {this.state.data[0]}
         <h1>What region is House Targaryen in?</h1> 
-        <h1>What's the coat of arms of House Lannister?</h1> 
-        <h1>What region is House Targaryen in?</h1> 
-        <h1>What region is House Targaryen in?</h1> 
-        <h1>What region is House Targaryen in?</h1> 
-        <h1>What region is House Targaryen in?</h1> 
+        {this.state.data[1]}
+        <h1>What's the coat of arms of House Lannister?</h1>
+        {this.state.data[1]} 
+        <h1>What is the second seat of House Baratheon?</h1> 
+        {this.state.data[1]}
+        <h1>What is Robert Baratheon's second alias?</h1> 
+        {this.state.data[1]}
+        <h1>What's the name of the founder of House Stark?</h1> 
+        {this.state.data[1]}
+        <h1>What are the titles of Catelyn Stark's three POV books?</h1> 
+        {this.state.data[1]}
         </div>
     
     )
