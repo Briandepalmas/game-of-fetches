@@ -7,17 +7,18 @@ export default class App extends Component {
     super(props);
 
     this.state = {
-      isLoaded: false,
       data: []
     }
   }
 
+  /* Followed assigment instructions, Noticed the "make multiple API Calls" resource and 
+  forgot to make components for the sake of making multiple API Calls at once */
   componentDidMount() {
     
-    //Code below implemented by following the provided resource for multiple API calls 
+    //Code below implemented by following the provided resource for assistance making multiple API calls 
     //Citation: https://www.storyblok.com/tp/how-to-send-multiple-requests-using-axios
 
-
+// Assign API URL to a variable
     let one = "http://anapioficeandfire.com/api/characters/16"
     let two = "http://www.anapioficeandfire.com/api/houses/37"
     let three = "http://www.anapioficeandfire.com/api/houses/229"
@@ -26,6 +27,8 @@ export default class App extends Component {
     let six= "http://www.anapioficeandfire.com/api/houses/362"
     let seven = "http://www.anapioficeandfire.com/api/characters/232"
     
+    // axios.get receives the api url from the variable created above and assings the data to another variable
+    //from the server request made
     const requestOne = axios.get(one);
     const requestTwo = axios.get(two);
     const requestThree = axios.get(three);
@@ -34,7 +37,10 @@ export default class App extends Component {
     const requestSix = axios.get(six);
     const requestSeven = axios.get(seven);
     
-    axios.all([requestOne, requestTwo, requestThree]).then(axios.spread((...responses) => {
+//axios.all takes in an array containing data .spread "..." iterates through the array in axios.all 
+    axios.all([requestOne, requestTwo, requestThree,requestFour,requestFive,requestSix,requestSeven])
+    .then(axios.spread((...responses) => {
+     
       const responseOne = responses[0]
       const responseTwo = responses[1]
       const responseThree = responses[2]
@@ -43,30 +49,34 @@ export default class App extends Component {
       const responseSix = responses[5]
       const responseSeven = responses[6]
       // use/access the results 
-
+//uses variable from above containing the JSON to call for specific info neededto answer G.O.T question.
       let a=responseOne.data.born
       let b=responseTwo.data.region
       let c=responseThree.data.coatOfArms
+      //calls the index of the information needed from the array property in the JSON
       let d=responseFour.data.seats[1]
       let e=responseFive.data.aliases[1]
+      //unable to make a "double fetch" to call api within data received from an api 
       let f=responseSix.data.founder //"https://www.anapioficeandfire.com/api/characters/209"
       let g=responseSeven.data.povBooks // "https://www.anapioficeandfire.com/api/books/1",
                                         // "https://www.anapioficeandfire.com/api/books/2",
                                         // "https://www.anapioficeandfire.com/api/books/3"
       
+
+//made data from letter variables an array of where each index contains the specific information requested
       this.setState({data: [a,b,c,d,e,f,g]})
-      //this.setState({data: bob})
+    
     })).catch(errors => {
       // react on errors.
     })
   }
  
-
+//call the index on this.state.data containing answer to the Game Of Thrones questions
   render() {
     return (
       
         <div>
-         {/* {this.state.data.map((f, id) =>  <p key={id}> {f.born} </p>)} */}
+
          <h1> Where was Margaery Tyrell born? </h1>
          {this.state.data[0]}
         <h1>What region is House Targaryen in?</h1> 
@@ -87,17 +97,19 @@ export default class App extends Component {
   }
 }
 
-// let one =  "http://anapioficeandfire.com/api/characters/583"
-// const a=axios.get(one)
-//     a.then(res => {
-//       const bc= res.data.culture;
-//       console.log("recipes ---->", bc)
+//Used fetch exercise for assistance as well
+
+/*let one =  "http://anapioficeandfire.com/api/characters/583"
+const a=axios.get(one)
+    a.then(res => {
+      const bc= res.data.culture;
+      console.log("recipes ---->", bc)
       
-//       this.setState({data: bc})
+      this.setState({data: bc})
 
-//     })
-//     .catch(error => {
-//       console.log('there is an eror', error)
-//     })
+    })
+    .catch(error => {
+      console.log('there is an eror', error)
+    })
 
-//   }
+  }*/
