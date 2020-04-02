@@ -60,7 +60,12 @@ export default class App extends Component {
         <div>
          {/* {this.state.data.map((f, id) =>  <p key={id}> {f.born} </p>)} */}
          <h1> Where was Margaery Tyrell born? </h1>
-         {this.state.data}
+         {this.state.data[0]}
+        <h1>What region is House Targaryen in?</h1> 
+        <h1>What's the coat of arms of House Lannister?</h1> 
+        <h1>What region is House Targaryen in?</h1> 
+        <h1>What region is House Targaryen in?</h1> 
+        <h1>What region is House Targaryen in?</h1> 
         <h1>What region is House Targaryen in?</h1> 
         </div>
     
