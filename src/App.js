@@ -29,30 +29,56 @@ export default class App extends Component {
     //     }
     //   ).catch(e => console.log("there's a error", e))
     // |||||||||||||||||||||||||||||||||||||
+    let one = "http://anapioficeandfire.com/api/characters/16"
+    let two = "http://www.anapioficeandfire.com/api/houses/37"
+    let three = "https://api.storyblok.com/v1/cdn/stories/vue?version=published&token=wANpEQEsMYGOwLxwXQ76Ggtt"
+    
+    const requestOne = axios.get(one);
+    const requestTwo = axios.get(two);
+    const requestThree = axios.get(three);
+    
+    axios.all([requestOne, requestTwo, requestThree]).then(axios.spread((...responses) => {
+      const responseOne = responses[0]
+      const responseTwo = responses[1]
+      const responesThree = responses[2]
+      // use/access the results 
 
-    axios.get("https://api.spoonacular.com/recipes/search?query=cheese&number=4&apiKey=27a02bbb5b48401f96bfda6a7d3e2545")
-    .then(res => {
-      const recipes = res.data.results;
-      console.log("recipes ---->", recipes)
+      let mary=responseOne.data.born
+      let bob=responseTwo.data.region
       
-      this.setState({data: recipes})
-
+      this.setState({data: [mary,bob]})
+      //this.setState({data: bob})
+    })).catch(errors => {
+      // react on errors.
     })
-    .catch(error => {
-      console.log('there is an eror', error)
-    })
-
   }
-
+ 
 
   render() {
     return (
-      <div>
-        <h1> Spoonacular API </h1>
-        <ul>
-          {this.state.data.map((recipe, id) => <li key={id}> {recipe.title} </li>)}
-        </ul>
-      </div>
+      
+        <div>
+         {/* {this.state.data.map((f, id) =>  <p key={id}> {f.born} </p>)} */}
+         <h1> Where was Margaery Tyrell born? </h1>
+         {this.state.data}
+        <h1>What region is House Targaryen in?</h1> 
+        </div>
+    
     )
   }
 }
+
+// let one =  "http://anapioficeandfire.com/api/characters/583"
+// const a=axios.get(one)
+//     a.then(res => {
+//       const bc= res.data.culture;
+//       console.log("recipes ---->", bc)
+      
+//       this.setState({data: bc})
+
+//     })
+//     .catch(error => {
+//       console.log('there is an eror', error)
+//     })
+
+//   }
