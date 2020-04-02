@@ -37,7 +37,7 @@ export default class App extends Component {
     const requestSix = axios.get(six);
     const requestSeven = axios.get(seven);
     
-//axios.all takes in an array containing data .spread "..." iterates through the array in axios.all 
+//axios.all takes in an array containing requested data and .spread "..." iterates through the array in axios.all 
     axios.all([requestOne, requestTwo, requestThree,requestFour,requestFive,requestSix,requestSeven])
     .then(axios.spread((...responses) => {
      
